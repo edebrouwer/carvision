@@ -6,7 +6,7 @@ import os
 
 #Directories to initialize
 dir_stack = ["pics_S","pics_erepS","pics_carexportS"]
-pic_path= "~/ENV/PIC/"
+pic_path= "../../PICS/"
 
 for dire in dir_stack:
     with open("./"+dire+".csv", "wb") as f:

@@ -35,7 +35,7 @@ def label_data(dir_csv,dir_pics,mode):
 
 
 def main():
-    label_data(dir_csv="./pics_S.csv",dir_pics="~/ENV/pics_S/",mode="blank")
+    label_data(dir_csv="./pics_S.csv",dir_pics="../../PICS/pics_S/",mode="blank")
 
 if __name__ == "__main__":
     main()
