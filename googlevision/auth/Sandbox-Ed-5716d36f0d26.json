@@ -1,0 +1,12 @@
+{
+  "type": "service_account",
+  "project_id": "sandbox-ed",
+  "private_key_id": "5716d36f0d262457f970258dbbd8310e2d512f9c",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCywkzSQFlvjaoQ\nNVw+m01cEvNIttF+j0Mgk97ectOtdTMmRtxjtIUrlf9T1urJT2Y+zQWBT3KSxT30\nEv6bVBrG/1jZLimGo0OWjW6NvPLfdhi5TlPjsAFJ7wGFFwolyqh6Ovki+nqVTOu3\nSqkryhi2sEdCZZHWxCiBMb80c/nc9k+pFwGfxzA7L60CzZLNH8kFUyZF8W68vdad\nzveoJxXux4uxFM1JMlXucqMTg/xNa5gRs8ABODgdypllhn6G5Re/b9lFzlUrwYbH\ndoT8hWYrJvpL48Ev48N2l9OUfJmz/0XWjWaXehbN7EFTDyn2j7i+ALrrSMNwq7u3\nzK/IBujTAgMBAAECggEAEx1WDpjFQiRGqO4JG5lgB8uaSnkLZLpCpiNPDmqpOjU7\n5Mi9/JwLLhJ013e16mnRl+nfaqjeqlVqCa/VnDFoSEV6BYXQo0N7pjJ1vbU/I+hN\nE3+N1ofK/idkT7bGJdgKSkEFGUQ/GGOTGanjoLmUXptHO2aAq5OVIIomanWeTw4K\nLsks6KHq897ZJA1UHHXbp7QNvApjLLAoZpNQXTSvk0+k7fnMKw3pMd7Q78dh8y5D\nmQdSGmgzqVY/S65QXFAXaiUy/oJ1Xm/jxdY0Q19zRZIeFoCqPkHnbKFSKVNnYIv8\nOD26FSIsF4yO1tZNHthOjuU5+82TfrdzU0noqtp35QKBgQDvSHobTazmoMXatnvU\nnwzJr9YyCf52NhESL6AMSJ0bQX19O1m9RgsNxzP4E0hwx9aEehkxzcQOBVXD6xGY\nlMrepHKWp20TY6yElMNo13qolCY4nmpqNq7WBoTFLShPXRuBvaVr2qArqj+ZAOrW\nfAUqPr39biG3/ZMw9TUIaG1AfwKBgQC/P1zzsqpUmCyMEmB7q/D7tYZ/MvO5V/61\nSsodlv2TcRKknURIx7WSSCJSO/qUSW1Nh/i9FGK0194cL5PCSYpBAwC5vLbT/7iH\nqQRQTri69XmZkys47IA8Ext/EIfBKCXXDGJc/FHh99tOFQJMp4A1uHHpYRa6oiGF\nW2c/ECQtrQKBgQDkkSziq93/J5AXjbzXq15Bwg8vGVDShm7kGk4drbc08+f1Gh5s\nqF2iuagwzeqioKGPRjqO0mj2o637Sa4zO95Vsmwq8J9GqC2BL8FBgqOOKIYiC2DH\nOJjlpLBq0OnydZPy6L79OYdKboP1mWS5oRol8mz1ip/26ugRGgmgkG/b7QKBgGrc\nMcjtfOUVvlZp8kVIFrfefw9V3f8jHuwXpQWRl5Cp7pvSUBRGmrro2VyPrPzsZkma\n/y5PVLPtpmqjXvGBe+HFlsMxogqk6WvL0eA5jFjSzqY0KEN/SkvG9WczSldwYmxd\nvBxu1CXqAz0G2ikQsr/RlryrhjK0YvyLzQ3crAplAoGAcIRz6a0PbIWm9QoWiJBT\nTwHOdkDRQ391ayENLbgYXS6YdIuEsF3O9MlJD3QuF45/8kr9HC83dwyOAR7sD1WE\nW9o4GekScecLl3KeULv79ZHP7z/JfsLZpj1xYOjth0p2cluc1sYll1CQ9Mh1J8RM\nRjecqdD9+iSKkqXKu6DBCoQ=\n-----END PRIVATE KEY-----\n",
+  "client_email": "carvision@sandbox-ed.iam.gserviceaccount.com",
+  "client_id": "117271494202482714056",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://accounts.google.com/o/oauth2/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/carvision%40sandbox-ed.iam.gserviceaccount.com"
+}
