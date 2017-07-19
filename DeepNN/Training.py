@@ -13,9 +13,9 @@ import numpy as np
 
 #Parameters for the training updates
 img_width, img_height = 400, 250
-nb_train_samples = 3000 #1184 unique pics
-nb_validation_samples = 400 #90 unique pics
-batch_size = 32
+nb_train_samples = 1000 #1184 unique pics
+nb_validation_samples = 180 #90 unique pics
+batch_size = 25
 epochs = 400
 
 label_mode="binary"
