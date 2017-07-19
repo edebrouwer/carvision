@@ -20,8 +20,8 @@ epochs = 400
 
 label_mode="binary"
 
-train_data_dir="./PICS/train"
-validation_data_dir="./PICS/val"
+train_data_dir="../PICS/trainnew"
+validation_data_dir="../PICS/valnew"
 
 base_model = InceptionV3(weights='imagenet',include_top=False,input_shape = (img_height, img_width, 3))
 
@@ -29,7 +29,8 @@ base_model = InceptionV3(weights='imagenet',include_top=False,input_shape = (img
 x = base_model.output
 x = GlobalAveragePooling2D()(x)
 # We add a fully-connected layer
-x = Dense(1024, activation='relu',kernel_initializer=initializers.VarianceScaling(scale=2.0))(x)
+#x = Dense(1024, activation='relu',kernel_initializer=initializers.VarianceScaling(scale=2.0))(x)
+
 # and a logistic layer
 predictions = Dense(1, activation='sigmoid',kernel_initializer=initializers.VarianceScaling(scale=2.0))(x)
 
@@ -50,7 +51,7 @@ model.compile(loss='binary_crossentropy',
 
 
 train_datagen = ImageDataGenerator(
-#preprocessing_function=preprocess_input,
+preprocessing_function=preprocess_input,
 horizontal_flip = True,
 fill_mode = "nearest",
 zoom_range = 0.1,
