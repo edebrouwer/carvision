@@ -15,7 +15,7 @@ import numpy as np
 img_width, img_height = 400, 250
 nb_train_samples = 1000 #1184 unique pics
 nb_validation_samples = 180 #90 unique pics
-batch_size = 25
+batch_size = 20
 epochs = 400
 
 label_mode="binary"
