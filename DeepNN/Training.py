@@ -7,6 +7,7 @@ from keras.callbacks import ModelCheckpoint, LearningRateScheduler, TensorBoard,
 from keras.optimizers import Adadelta
 from keras.utils import plot_model
 from keras import initializers
+import keras
 
 import numpy as np
 
