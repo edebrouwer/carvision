@@ -41,7 +41,7 @@ for pic in os.listdir(root_path+direc):
     img = image.img_to_array(img)
     img = np.expand_dims(img, axis=0)
     img = preprocess_input(img)
-    preds = int(round(model.predict(img)))
+    preds = int(np.round(model.predict(img)))
     pred_sum+=preds
 print("False Positive Rate :")
 print(pred_sum/len(os.listdir(root_path+direc)))
@@ -57,7 +57,7 @@ for pic in os.listdir(root_path+direc):
     img = image.img_to_array(img)
     img = np.expand_dims(img, axis=0)
     img = preprocess_input(img)
-    preds = int(round(model.predict(img)))
+    preds = int(np.round(model.predict(img)))
     pred_sum+=preds
     idx+=1
 print("Detection Rate :")
