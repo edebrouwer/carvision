@@ -82,15 +82,6 @@ target_size = (img_height, img_width),
 class_mode = label_mode)
 
 
-for X_batch, y_batch in train_datagen.flow_from_directory(train_data_dir,target_size = (img_height, img_width),batch_size = 2, class_mode = label_mode):
-    print(X_batch.shape)
-    #print(X_batch)
-    plt.imshow(X_batch[0,:,:,:])
-    # show the plot
-    plt.show()
-    print(y_batch)
-    break
-
 # Model Callbacks
 
 #Saved every 2 epochs in this case
