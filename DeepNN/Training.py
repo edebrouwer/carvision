@@ -36,16 +36,19 @@ predictions = Dense(1, activation='sigmoid',kernel_initializer=initializers.Vari
 
 model= Model(inputs=base_model.input, outputs=predictions)
 
-#We freeze the model expected the added layers
-for layer in base_model.layers:
+#We freeze part of the model
+for layer in model.layers[:280]:
     layer.trainable = False
+for layer in model.layers[280:]:
+    layer.trainable = True
 
 #Compilation of the model :
 
 #We use ada-delta
 opt=Adadelta(lr=1.0, rho=0.95, epsilon=1e-08, decay=0.0)
+optbis=keras.optimizers.Adam(lr=0.001, beta_1=0.9, beta_2=0.999, epsilon=1e-08, decay=0.0)
 model.compile(loss='binary_crossentropy',
-              optimizer=opt,
+              optimizer=optbis,
               metrics=['accuracy'])
 
 
@@ -80,16 +83,6 @@ validation_generator = test_datagen.flow_from_directory(
 validation_data_dir,
 target_size = (img_height, img_width),
 class_mode = label_mode)
-
-
-for X_batch, y_batch in train_datagen.flow_from_directory(train_data_dir,target_size = (img_height, img_width),batch_size = 2, class_mode = label_mode):
-    print(X_batch.shape)
-    #print(X_batch)
-    plt.imshow(X_batch[0,:,:,:])
-    # show the plot
-    plt.show()
-    print(y_batch)
-    break
 
 # Model Callbacks
 
