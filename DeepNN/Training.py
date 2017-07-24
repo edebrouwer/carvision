@@ -29,7 +29,7 @@ base_model = InceptionV3(weights='imagenet',include_top=False,input_shape = (img
 x = base_model.output
 x = GlobalAveragePooling2D()(x)
 # We add a fully-connected layer
-#x = Dense(1024, activation='relu',kernel_initializer=initializers.VarianceScaling(scale=2.0))(x)
+x = Dense(1024, activation='relu',kernel_initializer=initializers.VarianceScaling(scale=2.0))(x)
 
 # and a logistic layer
 predictions = Dense(1, activation='sigmoid',kernel_initializer=initializers.VarianceScaling(scale=2.0))(x)
@@ -89,7 +89,7 @@ class_mode = label_mode)
 
 #Saved every 2 epochs in this case
 save_period=2
-checkpoint = ModelCheckpoint("Inceptionv3_1.h5", monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False, mode='auto', period=save_period)
+checkpoint = ModelCheckpoint("Inceptionv3_2.h5", monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=True, mode='auto', period=save_period)
 early = EarlyStopping(monitor='val_acc', min_delta=0, patience=10, verbose=1, mode='auto')
 
 
