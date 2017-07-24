@@ -86,6 +86,7 @@ class_mode = label_mode)
 
 # Model Callbacks
 
+
 #Saved every 2 epochs in this case
 save_period=2
 checkpoint = ModelCheckpoint("Inceptionv3_1.h5", monitor='val_acc', verbose=1, save_best_only=True, save_weights_only=False, mode='auto', period=save_period)
