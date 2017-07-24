@@ -14,15 +14,15 @@ import numpy as np
 
 #Parameters for the training updates
 img_width, img_height = 400, 250
-nb_train_samples = 1000 #1184 unique pics
-nb_validation_samples = 180 #90 unique pics
+nb_train_samples = 2000 #1184 unique pics
+nb_validation_samples = 500 #90 unique pics
 batch_size = 20
 epochs = 400
 
 label_mode="binary"
 
-train_data_dir="../PICS/trainnew"
-validation_data_dir="../PICS/valnew"
+train_data_dir="../PICS/train_full"
+validation_data_dir="../PICS/val_full"
 
 base_model = InceptionV3(weights='imagenet',include_top=False,input_shape = (img_height, img_width, 3))
 
