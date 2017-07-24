@@ -12,7 +12,8 @@ import numpy as np
 
 import h5py as h5py
 
-from __future__ import division
+#Uncomment if to be used with Python2
+#from __future__ import division
 
 base_model = InceptionV3(weights='imagenet',include_top=False,input_shape = (250, 400, 3))
 x = base_model.output
