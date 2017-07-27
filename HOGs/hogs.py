@@ -163,7 +163,7 @@ def main():
     from sklearn.externals import joblib
 
     print("Computing HOGS from pics folder")
-    hog_to_csv(output_file="HOG_car.csv",HOG_dim=get_hogDim(64,64,0.5),train_dir_pos=".Pics/car/",train_dir_neg="./Pics/no_car",resize_fact=0.5)
+    hog_to_csv(output_file="HOG_car.csv",HOG_dim=get_hogDim(64,64,0.5),train_dir_pos="./Pics/car/",train_dir_neg="./Pics/no_car",resize_fact=0.5)
     print("Hogs saved to csv")
 
     C=[1e3, 5e3, 1e4, 5e4, 1e5]
@@ -179,6 +179,6 @@ def main():
 
     print("Saving Classifier")
     joblib.dump(mod,"./CLFs/Car/GridCLF.pkl")
-    joblib.dump(mod.best_estimator_,"/CLFs/Car/BestCLF.pkl")
+    joblib.dump(mod.best_estimator_,"./CLFs/Car/BestCLF.pkl")
 
 if __name__ == "__main__":main()
