@@ -178,7 +178,7 @@ def main():
     mod=best_svm("HOG_dam.csv",C,gamma)
 
     print("Saving Classifier")
-    joblib.dump(mod,"GridCLF.pkl")
-    joblib.dump(mod.best_estimator_,"BestCLF.pkl")
+    joblib.dump(mod,"./CLFs/Car/GridCLF.pkl")
+    joblib.dump(mod.best_estimator_,"/CLFs/Car/BestCLF.pkl")
 
 if __name__ == "__main__":main()
