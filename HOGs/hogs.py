@@ -152,11 +152,18 @@ def best_svm(csv_file,C,gamma):
     print("TEST ACCURACY :   ")
     print(1-accuracy)
     return clf
+
+def get_hogDim(width,height,resize_fact):
+    new_width=int(width*resize_fact/8)*8
+    new_height=int(height*resize_fact/8)*8
+    return (new_width/8-1)*(new_height/8-1)*36
+
+
 def main():
     from sklearn.externals import joblib
 
     print("Computing HOGS from pics folder")
-    hog_to_csv(output_file="HOG_dam.csv",HOG_dim=14*24*36,train_dir_pos="./Dam_car/",train_dir_neg="./Clean_car/",resize_fact=0.5)
+    hog_to_csv(output_file="HOG_car.csv",HOG_dim=get_hogDim(64,64,0.5),train_dir_pos=".Pics/car/",train_dir_neg="./Pics/no_car",resize_fact=0.5)
     print("Hogs saved to csv")
 
     C=[1e3, 5e3, 1e4, 5e4, 1e5]
