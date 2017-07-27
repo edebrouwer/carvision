@@ -164,7 +164,7 @@ def main():
     from sklearn.externals import joblib
 
     print("Computing HOGS from pics folder")
-    hog_to_csv(output_file="HOG_car.csv",HOG_dim=get_hogDim(64,64),train_dir_pos="./Pics/car/",train_dir_neg="./Pics/no_car",resize_fact=None)
+    hog_to_csv(output_file="HOG_car.csv",HOG_dim=get_hogDim(64,64),train_dir_pos="./Pics/car/",train_dir_neg="./Pics/no_car/",resize_fact=None)
     print("Hogs saved to csv")
 
     C=[1e3, 5e3, 1e4, 5e4, 1e5]
