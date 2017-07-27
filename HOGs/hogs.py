@@ -146,4 +146,32 @@ def best_svm(csv_file,C,gamma):
     param_grid = {'C': C,'gamma': gamma }
     clf = GridSearchCV(SVC(kernel='rbf', class_weight='balanced'), param_grid,cv=folds)
     clf.fit(X_train,Y_train)
+    #Accuracy on Test Set:
+    pred_test=clf.best_estimator_.predict(X_test)
+    accuracy=abs(pred_test-Y_test.T).sum()/len(pred_test)
+    print("TEST ACCURACY :   ")
+    print(1-accuracy)
     return clf
+def main:
+    from sklearn.externals import joblib
+    
+    print("Computing HOGS from pics folder")
+    hog_to_csv(output_file="HOG_dam.csv",HOG_dim=14*24*36,train_dir_pos="./Dam_car/",train_dir_neg="./Clean_car/",resize_fact=0.5)
+    print("Hogs saved to csv")
+
+    C=[1e3, 5e3, 1e4, 5e4, 1e5]
+    gamma=[0.0001, 0.0005, 0.001, 0.005, 0.01, 0.1]
+
+    print("Computing best svm classifier with grid :")
+    print("C")
+    print(C)
+    print("Gamma")
+    print(gamma)
+
+    mod=best_svm("HOG_dam.csv",C,gamma)
+
+    print("Saving Classifier")
+    joblib.dump(clf,"GridCLF.pkl")
+    joblib.dump(clf.best_estimator_,"BestCLF.pkl")
+
+if __name__ == "__main__":main()
