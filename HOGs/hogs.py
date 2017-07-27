@@ -156,7 +156,7 @@ def best_svm(csv_file,C,gamma):
 def get_hogDim(width,height,resize_fact=1):
     new_width=int(width*resize_fact/8)*8
     new_height=int(height*resize_fact/8)*8
-    return (new_width/8-1)*(new_height/8-1)*36
+    return int((new_width/8-1)*(new_height/8-1)*36)
 
 
 def main():
