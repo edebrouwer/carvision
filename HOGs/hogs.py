@@ -152,9 +152,9 @@ def best_svm(csv_file,C,gamma):
     print("TEST ACCURACY :   ")
     print(1-accuracy)
     return clf
-def main:
+def main():
     from sklearn.externals import joblib
-    
+
     print("Computing HOGS from pics folder")
     hog_to_csv(output_file="HOG_dam.csv",HOG_dim=14*24*36,train_dir_pos="./Dam_car/",train_dir_neg="./Clean_car/",resize_fact=0.5)
     print("Hogs saved to csv")
