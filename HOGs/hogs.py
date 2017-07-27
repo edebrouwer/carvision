@@ -35,6 +35,7 @@ def hog_compute(path=None,image=None,resize_fact=None):
 
     im=np.float32(im)/255.0
 
+    print(path)
     im=im[np.mod(im.shape[0],8):,np.mod(im.shape[1],8):,:]
 
 
