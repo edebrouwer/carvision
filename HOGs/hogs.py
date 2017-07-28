@@ -113,6 +113,8 @@ def pyramid(image,scale=1.5,lowest=32):
 
 def hog_to_csv(output_file=None,HOG_dim=None,train_dir_pos=None,train_dir_neg=None,resize_fact=None):
 
+    if (train_dir_pos[-1]!="/" or train_dir_neg!="/"):
+        raise Exception("Path of input images doesn't end with / ")
     file_list_pos=os.listdir(train_dir_pos)
     file_list_neg=os.listdir(train_dir_neg)
 
@@ -162,9 +164,10 @@ def get_hogDim(width,height,resize_fact=1):
 
 def main():
     from sklearn.externals import joblib
+    csv_file="HOG_car.csv"
 
     print("Computing HOGS from pics folder")
-    hog_to_csv(output_file="HOG_car.csv",HOG_dim=get_hogDim(64,64),train_dir_pos="./Pics/car/",train_dir_neg="./Pics/no_car/",resize_fact=None)
+    hog_to_csv(output_file=csv_file,HOG_dim=get_hogDim(64,64),train_dir_pos="./Pics/car/",train_dir_neg="./Pics/no_car/",resize_fact=None)
     print("Hogs saved to csv")
 
     C=[1e3, 5e3, 1e4, 5e4, 1e5]
@@ -176,7 +179,7 @@ def main():
     print("Gamma")
     print(gamma)
 
-    mod=best_svm("HOG_dam.csv",C,gamma)
+    mod=best_svm(csv_file,C,gamma)
 
     print("Saving Classifier")
     joblib.dump(mod,"./CLFs/Car/GridCLF.pkl")
