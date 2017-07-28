@@ -113,7 +113,7 @@ def pyramid(image,scale=1.5,lowest=32):
 
 def hog_to_csv(output_file=None,HOG_dim=None,train_dir_pos=None,train_dir_neg=None,resize_fact=None):
 
-    if (train_dir_pos[-1]!="/" or train_dir_neg!="/"):
+    if (train_dir_pos[-1]!="/" or train_dir_neg[-1]!="/"):
         raise Exception("Path of input images doesn't end with / ")
     file_list_pos=os.listdir(train_dir_pos)
     file_list_neg=os.listdir(train_dir_neg)
