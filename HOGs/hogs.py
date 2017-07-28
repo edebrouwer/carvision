@@ -34,7 +34,7 @@ def hog_compute(path=None,image=None,resize_fact=None):
         im = cv2.resize(im,None,fx=resize_fact, fy=resize_fact, interpolation = cv2.INTER_CUBIC)
 
     im=np.float32(im)/255.0
-    
+
     im=im[np.mod(im.shape[0],8):,np.mod(im.shape[1],8):,:]
 
 
@@ -164,9 +164,11 @@ def get_hogDim(width,height,resize_fact=1):
 def main():
     from sklearn.externals import joblib
     csv_file="HOG_car.csv"
+    im_w=64
+    im_h=64
 
     print("Computing HOGS from pics folder")
-    hog_to_csv(output_file=csv_file,HOG_dim=get_hogDim(64,64),train_dir_pos="./Pics/car/",train_dir_neg="./Pics/no_car/",resize_fact=None)
+    hog_to_csv(output_file=csv_file,HOG_dim=get_hogDim(im_w,im_h),train_dir_pos="./Pics/car/",train_dir_neg="./Pics/no_car/",resize_fact=None)
     print("Hogs saved to csv")
 
     C=[1e3, 5e3, 1e4, 5e4, 1e5]
