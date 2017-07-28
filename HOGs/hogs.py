@@ -161,6 +161,35 @@ def get_hogDim(width,height,resize_fact=1):
     return int((new_width/8-1)*(new_height/8-1)*36)
 
 
+def detect_im(im_path, clf_path, threshold=0, scale=1.1, lowest=64,windowSize=(64,64),stride=10):
+    #read input image
+    image=cv2.imread(im_path)
+
+    #Classifier used for the detection :
+    from sklearn.externals import joblib
+    clf=joblib.load(clf_path)
+
+    #subplots init.
+    fig,ax=plt.subplots(1,figsize=(30,30))
+    ax.imshow(cv2.cvtColor(image, cv2.COLOR_BGR2RGB))
+
+    #Loop over different scales of the image.
+    for im_sc,current_scale in pyramid(image,scale=scale,lowest=lowest):
+        for x,y,im_sw in sliding_window(im_sc,stepSize=stride,windowSize=windowSize):
+            preds=clf.best_estimator_.predict(hog_compute(image=im_sw).flatten().reshape(1,-1))
+            if preds==1:
+                if threshold >0:
+                    dist_sep=clf.best_estimator_.decision_function(hog_compute(image=im_sw).flatten().reshape(1,-1))
+                else :
+                    dist_sep=1 #We do not use thresholding
+                if dist_sep > threshold:    #We want some confidence on the prediction.
+                    rect=patches.Rectangle((int(x*current_scale),int(y*current_scale)),64*current_scale,64*current_scale,linewidth=2,edgecolor='r',facecolor='none')
+                    ax.add_patch(rect)
+    plt.savefig(im_path[:-3]+"_d.jpg")
+    return(plt)
+
+
+
 def main():
     from sklearn.externals import joblib
     csv_file="HOG_car.csv"
@@ -183,7 +212,7 @@ def main():
     mod=best_svm(csv_file,C,gamma)
 
     print("Saving Classifier")
-    joblib.dump(mod,"./CLFs/Car/GridCLF.pkl")
-    joblib.dump(mod.best_estimator_,"./CLFs/Car/BestCLF.pkl")
+    joblib.dump(mod,"./CLFs/Car/GridCLF.pkl",protocol=2)
+    joblib.dump(mod.best_estimator_,"./CLFs/Car/BestCLF.pkl",protocol=2)
 
 if __name__ == "__main__":main()
