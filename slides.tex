@@ -1,0 +1,471 @@
+\documentclass{beamer}
+
+% \usepackage{beamerthemesplit} // Activate for custom appearance
+
+\usetheme{Madrid}
+\title{CarVision}
+\subtitle{Car Damage Visual Detection}
+\author{Edward De Brouwer}
+\titlegraphic{\includegraphics[width=6cm]{front.png}}
+
+\date{\today}
+
+\AtBeginSection[]
+{
+  \begin{frame}
+  \frametitle{Contents}
+  \tableofcontents[currentsection, hideothersubsections, pausesubsections]
+  \end{frame} 
+}
+
+\begin{document}
+
+\frame{\titlepage}
+
+\section[Outline]{}
+\frame{\tableofcontents}
+
+\section{Introduction}
+
+\frame{
+\frametitle{Goals and Objectives}
+
+Main objective is to explore the potential of computer vision for car crash assistance. \\~\\
+
+Scenario : after a damage, the insured takes a picture of the car :
+\begin{itemize}
+\item<1-> Automatic estimation of the costs
+\item<2-> Orientation towards the most suited garage or bodyshop
+\item<3-> Better handling of the claim. Quick and efficient
+\item<4-> Mitigation of the fraud \\~\\
+\end{itemize}
+
+\pause
+\pause
+\pause 
+\pause
+
+May be the topic of an hackathon hosted by AXA Belgium. 
+
+}
+
+
+\section{The Data}
+
+\frame{
+\frametitle{Dataset}
+Bad news : there is no available dataset ! \\~\\
+
+Possible tracks :
+\begin{itemize}
+\item<1-> Informex : third party that collects and stores data about all the claims.
+	\begin{itemize}
+		\item No automatic way of fetching the data 
+		\item Confidentiality Issues
+		\item May be charged (Third Party)
+		\item Format : pictures embedded in pdfs files...
+	\end{itemize}
+	
+\item<2-> DIY : The winding road !
+\end{itemize}
+}
+
+\frame{
+\frametitle{Dataset}
+
+Scrapping of cars pictures over 3 big second hand car online retailers :
+
+\begin{itemize}
+\item Autolive.be : Damaged and Clean Cars
+\item Eraiparables.com : Damaged and Clean Cars
+\item Carexportamerica.com : Mainly Clean Cars \\~\\
+\end{itemize}
+
+Cropping (Google Vision API assisted) and resizing to 400x250 px. \\~\\
+
+Manual labelling through a computer assisted framework :
+\begin{itemize}
+\item Clean Car
+\item Damaged Car
+\item Remove 
+\end{itemize}
+}
+
+\frame{
+\frametitle{Dataset}
+\framesubtitle{Example : Damaged Car}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=12cm]{damaged.png} % requires the graphicx package
+\end{figure}
+}
+
+
+\frame{
+\frametitle{Dataset}
+\framesubtitle{Example : Clean Car}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=12cm]{clean.png} % requires the graphicx package
+\end{figure}
+}
+
+\frame{
+\frametitle{Dataset}
+\framesubtitle{Example : Removed Car}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=12cm]{remove.png} % requires the graphicx package
+\end{figure}
+}
+
+\frame{
+\frametitle{Dataset}
+
+1066 retained pictures among which :
+
+\begin{itemize}
+\item 444 Clean Cars
+\item 622 Damaged Cars \\~\\
+\end{itemize}
+
+Separated in 3 folders as :
+
+\begin{itemize}
+\item TrainSet : $70\%$
+\item ValidationSet: $20\%$
+\item TestSet: $10\%$
+\end{itemize}
+
+Percentage of Damaged in each set is kept constant : $58 \%$ (baseline) \\~\\
+
+With Data Augmentation techniques, the data set was inflated to 3500 images.
+}
+
+\section{Deep Convolutional Neural Networks}
+
+\frame{
+\frametitle{ConvNets}
+\framesubtitle{Convolutional Layer}
+
+Convolutional Neural Networks: makes use of spatial organization of the data. \\~\\
+
+Main component : the convolutional layer :
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=10cm]{conv.png} % requires the graphicx package
+\end{figure}
+}
+
+
+\frame{
+\frametitle{ConvNets}
+\framesubtitle{Stacked Together}
+
+Each layer detects increasingly complex features in the image. \\~\\
+Spatial dimension is reduced progressively through the network.
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=7cm]{convnet.png} % requires the graphicx package
+\end{figure}
+
+A classifier (or regression) is then stacked on top of the last features.
+}
+
+\frame{
+\frametitle{ConvNets}
+\frametitle{Performance}
+Image Net Challenge : Correctly classify pictures among 1000 labels. \\~\\
+
+Top-5 error : 
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=7cm]{ilsvrc.png} % requires the graphicx package
+\end{figure}
+
+Team from Nanjing University won the 2017 Challenge (Detection).
+}
+
+
+\frame{
+\frametitle{ConvNets}
+\frametitle{Performance}
+Combined with other network structures (RNN), we can achieve impressive results :
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=10cm]{captioning.png} % requires the graphicx package
+\end{figure}
+}
+
+
+\section{Transfer Learning}
+
+\frame{
+\frametitle{GoogleNet InceptionV3}
+
+Research teams already successfully trained deep networks for detection. \\~\\
+
+Idea : re-use part of their network and specialize in on apart specific task.
+
+I chose the GoogleNet InceptionV3 network :
+
+\begin{itemize}
+\item Winner of the 2014 ILSVRC
+\item $5.6\%$ Top-5 error
+\item 42 layers deep
+\item Weights are public and easily available through Keras
+\item Took weeks to train on GPUs
+\end{itemize}
+
+\begin{flushright}
+And it looks like ...
+\end{flushright}
+}
+
+\frame{
+\frametitle{GoogleNet InceptionV3}
+...this :
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=10cm]{v3.png} % requires the graphicx package
+\end{figure}
+}
+
+\frame{
+\frametitle{GoogleNet InceptionV3}
+\framesubtitle{Scavenging a Deep Network}
+Lower layers are supposed to learn basic features of the pictures
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=10cm]{transferlearning.png} % requires the graphicx package
+\end{figure}
+
+Add customized upper layers (classifiers) upon the top features ! \\~\\
+}
+
+\frame{
+\frametitle{GoogleNet InceptionV3}
+\framesubtitle{Scavenging a Deep Network}
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=10cm]{transferlearning.png} % requires the graphicx package
+\end{figure}
+
+Results :
+\begin{itemize}
+\item False Positive : $16\%$  and    False Negative : $22\%$
+\item Overal Performance : $81\%$
+\end{itemize}
+
+If we use an SVM instead :
+\begin{itemize}
+\item Overal Performance : $79\%$
+\end{itemize}
+}
+
+\frame{
+\frametitle{GoogleNet InceptionV3}
+\framesubtitle{Scavenging a Deep Network}
+
+Let's do better !
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=10cm]{transfer2.png} % requires the graphicx package
+\end{figure}
+
+Results :
+\begin{itemize}
+\item False Positive : $1.5\%$  and    False Negative : $10.2\%$
+\item Overal Performance : $93.47\%$
+\end{itemize}
+}
+
+\section{Visualization and Damage Localization}
+
+\frame{
+\frametitle{Visualization}
+\framesubtitle{Deep Dreams...}
+
+We wish to have better insight on how our model is working. \\~\\
+
+Different parts of the network to visualize :
+
+\begin{itemize}
+\item Feature Maps can be visualized as grey-scale pictures.
+\item Filters are more difficult as their dimension depends on the depth of the previous layer...
+\end{itemize}
+
+Idea : compute the image that maximizes the output of a specific filter through gradient ascent :
+
+\begin{table}
+\centering
+\begin{tabular}{cc}
+   \includegraphics[width=5cm]{filter1.png} % requires the graphicx package
+&
+   \includegraphics[width=5cm]{filter2.png} % requires the graphicx package
+\\
+\end{tabular}
+\end{table}
+}
+
+\frame{
+\frametitle{Visualization}
+\framesubtitle{Network's attention : Class Activation Map}
+
+What if we can visualize what the network is focusing on ? \\~\\
+
+Idea : retrieve activations of last convolutional layer.
+
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=4cm]{gap.png} % requires the graphicx package
+\end{figure}
+
+
+\begin{equation*}
+\alpha_k^c = \frac{1}{Z} \sum_i \sum_j \frac{\partial{y^c}}{\partial A^k_{i,j}}
+\end{equation*}
+
+\begin{equation*}
+CAM=ReLu(\sum_k \alpha_k^c A^k)
+\end{equation*}
+}
+
+\frame{
+\frametitle{Visualization}
+\framesubtitle{Network's attention : Class Activation Map}
+
+The resulting heatmap gives us the focus of the network. \\~\\
+
+And implicitly, a localization algorithm !
+
+
+\begin{table}
+\centering
+\begin{tabular}{cc}
+   \includegraphics[width=5cm]{front.png} % requires the graphicx package
+&
+   \includegraphics[width=5cm]{heatmap2.png} % requires the graphicx package
+\\
+\end{tabular}
+\end{table}
+}
+
+
+\section{Histogram of Oriented Gradients}
+
+\frame{
+\frametitle{HOGs}
+\framesubtitle{A side approach}
+
+I explored another approached for car-damage detection: the histogram of oriented gradients. \\~\\
+
+Idea : manually compute features based on gradients in the image :
+
+\begin{itemize}
+\item 9 bins histogram of gradients for each image patch 
+\item Bins corresponds to unsigned angles 
+\item Dimensionality Reduction : 64X64X3 becomes 7x7x36 (divided by 7)
+\end{itemize}
+
+Then, train a SVM based on those features. \\~\\
+
+Results:
+\begin{itemize}
+\item $98\%$ test accuracy on car/no car detection
+\item $79\%$ test accuracy on damaged/clean detection
+\end{itemize}
+}
+
+
+\frame{
+\frametitle{HOGs}
+\framesubtitle{Localization}
+
+A sliding window is then applied on different scales of the input picture :
+
+\begin{figure}[htbp]
+   \centering
+   \includegraphics[width=11cm]{hogs.png} % requires the graphicx package
+\end{figure}
+
+}
+
+\section{Conclusion and Vision}
+\frame{
+\frametitle{Conclusions}
+
+This is only the beginning, many refinements can still be brought. \\~\\
+
+\begin{itemize}
+\item Getting clean data is not easy !!!
+\item Overfitting concerns in ConvNets (better regularization needed)
+\item Better Generalization through more general dataset
+\item Other Architectures could be investigated
+\item Other technologies could be studied (e.g. per-pixel Segmentation)
+\item Still working on getting the code tidy
+\end{itemize}
+}
+
+\frame{
+\frametitle{Vision}
+
+Images are a important source of unused information \\~\\
+
+Some (fancy) possible applications :
+
+\begin{itemize}
+\item Enhanced pricing evaluation
+\item More Efficient handling of claims
+\item Fraud Detection by combining picture angle and damage location
+\item Fraud Detection by comparison with the official report
+\item Assisted trial decisions (He was definitely drunk)
+\item Many more !
+\end{itemize}
+}
+
+\frame{
+\frametitle{Hackathon}
+
+Computer vision on damaged cars could be an interesting topic for an hackathon \\~\\
+
+Recommendations :
+
+\begin{itemize}
+\item Provide participants with a clean dataset
+\item Pictures should come with extra data such as model, severity,...
+\item Many different approaches with same data : Regression, localization, detection, ... Stimulate creativity
+\item A crash course on deep CNN and related Python libs could be a good idea for beginners
+\item Training those models may take time, provide some computational power (Google Cloud ?)
+
+\end{itemize}
+
+}
+
+\frame{
+\frametitle{Thank You !}
+
+\textbf{Thank you} all for this internship at AXA DataLab !
+
+\vfill
+
+\begin{flushright}
+Any Questions ?
+\end{flushright}
+
+}
+
+
+
+\end{document}
